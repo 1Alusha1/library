@@ -1,0 +1,40 @@
+.form {
+  width: 100%;
+  padding: 15px;
+}
+
+.form-item label {
+  display: block;
+  margin: 10px 0 10px 0;
+}
+
+.form-item input {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid gray;
+  outline: none;
+}
+
+.form input[type="submit"] {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fff;
+  border: none;
+  border-bottom: 2px solid gray;
+  cursor: pointer;
+}
+
+.form input[type="submit"]:hover{
+  border-color: rgb(31, 160, 106);
+}
+
+
+.form-item input.inputWrong,
+.form input[type="submit"].inputWrong {
+  border-color: red;
+}
+
+.form-item input.inputSuccess {
+  border-color: rgb(31, 160, 106);
+}

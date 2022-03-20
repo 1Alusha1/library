@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  height: 50px;
+  background: rgb(43, 42, 42);
+}
+
+.header .logo a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-list {
+  display: flex;
+}
+
+.header-list__item {
+  list-style: none;
+  margin-left: 15px;
+}
+
+.header-list__item a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-list__item .router-link-active {
+  color: rgb(40, 219, 145);
+}
