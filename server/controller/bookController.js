@@ -2,14 +2,45 @@ import Book from "../model/Book.js";
 import Author from "../model/Author.js";
 import Ganre from "../model/Ganre.js";
 
-export const getBook = (req, res) => {
+export const getBooks = (req, res) => {
     Book.find({}, (err, books) => {
         if (err) console.log(err);
         res.send(books);
     });
 };
 
-export const postCreateBook = (req, res) => {
+export const getBook = (req, res) => {
+    Book.find({ _id: req.params.id }, (err, book) => {
+        if (err) console.log(err)
+        res.send(book)
+    })
+}
+
+export const removeBook = (req, res) => {
+    const body = req.body
+    Ganre.findOneAndUpdate({ name: body.ganre[0] }, { $pull: { books: body.name } }, (err) => err ? console.log(err) : false)
+    Author.findOneAndUpdate({ name: body.author }, { $pull: { bookList: body.name } }, (err) => err ? console.log(err) : false)
+
+    Book.deleteOne({ _id: body._id }, (err, doc) => {
+        if (err) console.log(err)
+        res.send(doc)
+    })
+}
+
+export const putChangeBook = (req, res) => {
+    const id = req.body.data.id;
+    const name = req.body.data.name;
+    const ganre = req.body.data.ganre;
+    const descr = req.body.data.descr;
+    const author = req.body.data.author;
+
+    Book.findOneAndUpdate({ _id: id }, { $set: { name: name, descr: descr } }, (err, doc) => {
+        if (err) console.log(err);
+        res.send({})
+    })
+}
+
+export const postCreateBooks = (req, res) => {
     let book = new Book({
         name: req.body.name,
         ganre: req.body.ganre,
@@ -77,7 +108,10 @@ export const postCreateBook = (req, res) => {
             });
         }
     });
+    res.send({})
 };
+
+
 
 export const postCreateAuthor = (req, res) => {
     let author = new Author({

@@ -1,15 +1,30 @@
 <template>
-  <div v-if="store.getters['book/book'].length">
-    <ul class="lib-list">
-      <li
-        @click="remove(item._id)"
-        class="lib-list__item"
-        v-for="item in store.getters['book/book']"
-        :key="item._id"
+  <div v-if="store.getters['book/books'].length">
+    <div class="cards">
+      <div
+        class="card"
+        v-for="book in store.getters['book/books']"
+        :key="book._id"
       >
-        {{ item }}
-      </li>
-    </ul>
+        <div class="book-author">
+          <h1>Автор:</h1>
+          {{ book.author }}
+        </div>
+        <div class="card-name" :key="book._id">
+          <h2>Название:</h2>
+          {{ book.name }}
+        </div>
+        <div class="card-ganre" v-for="ganre in book.ganre" :key="ganre">
+          <h3>Жанр:</h3>
+          {{ ganre }}
+        </div>
+        <div class="book-descr">
+          <h4>О книге:</h4>
+          {{ book.descr }}
+        </div>
+        <router-link :to="`/book/${book._id}`"> Открыть</router-link>
+      </div>
+    </div>
   </div>
   <div v-else>
     <h1>Books not found</h1>
@@ -24,7 +39,6 @@ export default {
     const store = useStore();
 
     onMounted(() => store.dispatch("book/getBooks"));
-
     const remove = (a) => {
       console.log(a);
     };

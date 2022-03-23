@@ -3,6 +3,7 @@ import libMain from '../views/lib-main.vue'
 import libCreateBook from '../views/lib-create-book.vue'
 import libCreateAuthor from '../views/lib-create-author.vue'
 import libAllBook from '../views/lib-all-book.vue'
+import libBook from '../views/lib-book.vue'
 const routes = [
   {
     path: '/',
@@ -22,7 +23,12 @@ const routes = [
   {
     path: '/books',
     name: 'books',
-    component: libAllBook
+    component: libAllBook,
+  },
+  {
+    path: '/book/:id',
+    name: 'book',
+    component: libBook
   },
 ]
 

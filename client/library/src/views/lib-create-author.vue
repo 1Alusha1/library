@@ -21,7 +21,10 @@
         v-model="data.birthday"
       />
     </div>
-    <input type="submit" :class="{ inputWrong: valid, inputSuccess: isEmptyInput(data.birthday) }" />
+    <input
+      type="submit"
+      :class="{ inputWrong: valid, inputSuccess: isEmptyInput(data.birthday) }"
+    />
   </lib-form>
 </template>
 
@@ -29,10 +32,13 @@
 import libForm from "../components/lib-form.vue";
 import { validInput, isEmptyInput } from "../use/validation.js";
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 export default {
   components: { libForm },
 
   setup() {
+    const store = useStore();
+
     const valid = ref(false);
     const data = reactive({
       name: "",
@@ -41,16 +47,10 @@ export default {
 
     const send = async () => {
       if (validInput(data)) {
-        console.log(data);
-        await fetch("http://localhost:3000/book/createauthor", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: { "content-type": "application/json" },
-        });
+        store.dispatch("book/createbdNote", { data: data, method: "author" });
 
-        data.name.value = "";
-        data.birthday.value = "";
-        data.books.value = "";
+        data.name = "";
+        data.birthday = "";
 
         valid.value = false;
       } else {

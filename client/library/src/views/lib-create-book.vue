@@ -1,6 +1,15 @@
 <template>
   <lib-form @sendForm="send">
     <div class="form-item">
+      <label>Имя</label>
+      <input
+        type="text"
+        name="name"
+        :class="{ inputWrong: valid, inputSuccess: isEmptyInput(data.name) }"
+        v-model="data.name"
+      />
+    </div>
+    <div class="form-item">
       <label>Жанр</label>
       <input
         type="text"
@@ -38,10 +47,12 @@
 import libForm from "../components/lib-form.vue";
 import { validInput, isEmptyInput } from "../use/validation.js";
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 export default {
   components: { libForm },
 
   setup() {
+    const store = useStore();
     const valid = ref(false);
     const data = reactive({
       name: "",
@@ -51,12 +62,7 @@ export default {
     });
     const send = async () => {
       if (validInput(data)) {
-        console.log(data);
-        await fetch("http://localhost:3000/book/createbook", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: { "content-type": "application/json" },
-        });
+        store.dispatch("book/createbdNote", { data: data, method: "book" });
 
         data.name = "";
         data.ganre = "";
