@@ -39,16 +39,8 @@ export default {
     const store = useStore();
 
     onMounted(() => store.dispatch("book/getBooks"));
-    const remove = (a) => {
-      console.log(a);
-    };
-    const update = (a) => {
-      console.log(a);
-    };
     return {
       store,
-      remove,
-      update,
     };
   },
 };

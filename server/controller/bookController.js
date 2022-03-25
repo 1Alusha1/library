@@ -2,6 +2,16 @@ import Book from "../model/Book.js";
 import Author from "../model/Author.js";
 import Ganre from "../model/Ganre.js";
 
+import path from "path";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+import  fs  from "fs";
+
+export const downloadBook = (req, res) => {
+    res.download(`D:/js/projects/library/server/uploads/${req.params.id}/${req.params.name.split(' ').join('')}.rar`)
+}
+
 export const getBooks = (req, res) => {
     Book.find({}, (err, books) => {
         if (err) console.log(err);
@@ -30,9 +40,7 @@ export const removeBook = (req, res) => {
 export const putChangeBook = (req, res) => {
     const id = req.body.data.id;
     const name = req.body.data.name;
-    const ganre = req.body.data.ganre;
     const descr = req.body.data.descr;
-    const author = req.body.data.author;
 
     Book.findOneAndUpdate({ _id: id }, { $set: { name: name, descr: descr } }, (err, doc) => {
         if (err) console.log(err);
@@ -46,7 +54,7 @@ export const postCreateBooks = (req, res) => {
         ganre: req.body.ganre,
         descr: req.body.descr,
         author: req.body.author,
-        path: "../upload",
+        path: `../uploads/`,
     });
     let author = new Author({
         name: req.body.author,

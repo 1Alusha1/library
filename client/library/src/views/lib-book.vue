@@ -27,8 +27,25 @@
 
       <button @click="edit = !edit" v-if="!edit">Изменить</button>
       <button @click="save(book._id)" v-else>Сохранить</button>
-      {{ edit }}
     </div>
+
+    <h1>Добавить файл</h1>
+    <form
+      class="form"
+      :action="`http://localhost:3000/upload/${book._id}`"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label>файл</label>
+      <input type="file" name="filedata" />
+      <input type="submit" value="Отправить" />
+    </form>
+    <a
+      :href="`http://localhost:3000/book/downloadbook/${book._id}/${book.name
+        .split(' ')
+        .join('')}`"
+      >Скачать</a
+    >
   </div>
 </template>
 
@@ -75,6 +92,7 @@ export default {
       edit,
       save,
       newData,
+      router,
     };
   },
 };
