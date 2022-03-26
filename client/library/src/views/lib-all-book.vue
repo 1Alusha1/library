@@ -6,21 +6,21 @@
         v-for="book in store.getters['book/books']"
         :key="book._id"
       >
-        <div class="book-author">
+        <div class="card-author">
           <h1>Автор:</h1>
-          {{ book.author }}
+          <p>{{ book.author }}</p>
         </div>
         <div class="card-name" :key="book._id">
           <h2>Название:</h2>
-          {{ book.name }}
+          <p>{{ book.name }}</p>
         </div>
         <div class="card-ganre" v-for="ganre in book.ganre" :key="ganre">
           <h3>Жанр:</h3>
-          {{ ganre }}
+          <p>{{ ganre }}</p>
         </div>
-        <div class="book-descr">
+        <div class="card-descr">
           <h4>О книге:</h4>
-          {{ book.descr }}
+          <p>{{ book.descr }}</p>
         </div>
         <router-link :to="`/book/${book._id}`"> Открыть</router-link>
       </div>

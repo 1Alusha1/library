@@ -1,0 +1,26 @@
+.card {
+  margin-bottom: 30px;
+}
+
+.card-author,
+.card-name,
+.card-ganre {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-author p,
+.card-name p,
+.card-ganre p {
+  margin-left: 5px;
+}
+
+.book-descr {
+  margin-bottom: 20px;
+}
+
+.addFile,
+.download-link {
+  text-align: center;
+}
